@@ -1,32 +1,196 @@
 {
-	"*": [
-		{
-			"article": "Bryson_DeChambeau",
-			"project": "https://en.wikipedia.org"
-		}
-	],
-	"eo.wikipedia":  [
-		{
-			"article": "Vikipedio:Diskutejo"
-		  },
-		  {
-			"article": "Uzanto:Dominik"
-		  }
-	],
-	"fr.wikipedia": [
-		{
-			"article": "Élections_législatives_françaises_de_2024"
-		}
-	],
-	"en.wikipedia": [
-		{
-			"article": "Bryson_DeChambeau"
-		},
-		{
-			"article": "UEFA_Euro_2024"
-		},
-		{
-			"article": "Katie_Ledecky"
-		}
-	]
+  "*": [
+    {
+      "article": "Main_Page",
+      "project": "https://pa.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://eu.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://ne.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://ang.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://blk.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://bn.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://br.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://cdo.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://co.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://cv.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://dag.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://et.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://ext.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://fo.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://frp.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://ht.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://kw.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://ky.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://la.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://mt.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://nds.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://nov.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://ny.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://oc.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://sco.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://shn.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://ss.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://tr.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://ks.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://ca.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://ban.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://hyw.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://bs.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://be.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://be-tarask.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://el.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://fy.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://kbp.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://lo.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://nn.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://sk.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://vi.wikipedia.org"
+    }
+  ],
+  "eo.wikipedia": [
+    {
+      "article": "Vikipedio:Diskutejo"
+    },
+    {
+      "article": "Uzanto:Dominik"
+    }
+  ],
+  "fr.wikipedia": [
+    {
+      "article": "Élections_législatives_françaises_de_2024"
+    }
+  ],
+  "en.wikipedia": [
+    {
+      "article": "Bryson_DeChambeau"
+    },
+    {
+      "article": "UEFA_Euro_2024"
+    },
+    {
+      "article": "Katie_Ledecky"
+    }
+  ]
 }
