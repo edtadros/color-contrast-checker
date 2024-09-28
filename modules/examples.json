@@ -1,4 +1,30 @@
 {
+  "debug": [
+    {
+      "article": "Main_Page",
+      "project": "https://pa.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://eu.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://ne.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://ang.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://blk.wikipedia.org"
+    },
+    {
+      "article": "Main_Page",
+      "project": "https://bn.wikipedia.org"
+    }
+  ],
   "*": [
     {
       "article": "Main_Page",

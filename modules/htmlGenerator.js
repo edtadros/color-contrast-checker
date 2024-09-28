@@ -60,9 +60,19 @@ function generateHTMLPage( file, simplifiedLists, noColorContrastViolationCount,
 
 		const failingPages = colorContrastViolationCount;
 
+		// Modify the pageTitle based on the file parameter
+		let pageTitle;
+		if (file === 'light') {
+			pageTitle = 'Light Mode Color Contrast Report';
+		} else if (file === 'night') {
+			pageTitle = 'Dark Mode Color Contrast Report';
+		} else {
+			pageTitle = 'Color Contrast Report';
+		}
+
 		// Render the template with dynamic content
 		const htmlContent = mustache.render( template, {
-			pageTitle: "Wikipedia Color Contrast Errors",
+			pageTitle: pageTitle,
 			pagesScanned: pagesScanned,
 			totalItems: totalItems,
 			tableSections: tableSections,

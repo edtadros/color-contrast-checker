@@ -185,6 +185,12 @@ function sleep( time ) {
 }
 
 async function runAccessibilityChecksForURLs( project, query, mobile, source, limit, sleepDuration = 5000, addBetaClusterStyles = false, includeScreenshots = false ) {
+	// Initialize summaryData for summary report
+	let summaryData = {
+		headers: ["#", "URL", "Light", "Dark"],
+		data: []
+	};
+
 	const testCases = await createTestCases( { project, query, mobile, source, limit } );
 
 	// Run accessibility checks for each URL concurrently
@@ -204,10 +210,19 @@ async function runAccessibilityChecksForURLs( project, query, mobile, source, li
 		await sleep( sleepDuration * i );
 		try {
 			console.log(`Run accessibility check ${i} on ${testCase.url}`);
+
+			// Add a new entry to summaryData when starting to check a URL
+			summaryData.data.push({
+				id: i + 1,
+				url: new URL(testCase.url).hostname,
+				light: 0,  // Initialize to 0 this will be overwritten by the actual count
+				dark: 0    // Initialize to 0 this will be overwritten by the actual count
+			});
+
 			let styleUrl = null;
 			if ( addBetaClusterStyles && mobile ) {
 				styleUrl = 'https://en.wikipedia.beta.wmflabs.org/w/load.php?modules=skins.minerva.base.styles&only=styles';
-			}
+				}
 			return await runAccessibilityCheck( browser, testCase.url, styleUrl, testCase.title, includeScreenshots );
 		} catch ( e ) {
 			console.log( `Failed to run accessibility check on ${test.url}` );
@@ -237,10 +252,24 @@ async function runAccessibilityChecksForURLs( project, query, mobile, source, li
 					message: node.failureSummary
 				} ) );
 
+				const project = new URL(testCase.url).hostname;
+				const errorCount = simplifiedList ? simplifiedList.length : 0;
+
 				console.log( `Result for URL ${testCase.title}:`, {
+					project: project,
 					simplifiedList,
-					colorContrastErrorNum: simplifiedList ? simplifiedList.length : 0,
+					colorContrastErrorNum: errorCount
 				} );
+
+				// Update summaryData
+				const summaryIndex = summaryData.data.findIndex(item => item.url === project);
+				if (summaryIndex !== -1) {
+					if (file === 'light') {
+						summaryData.data[summaryIndex].light = errorCount;
+					} else if (file === 'night') {
+						summaryData.data[summaryIndex].dark = errorCount;
+					}
+				}
 
 				allSimplifiedLists.push( simplifiedList );
 			}
@@ -248,7 +277,7 @@ async function runAccessibilityChecksForURLs( project, query, mobile, source, li
 		const filePath = path.join( __dirname, `../report/${file}.html` );
 		// Generating HTML table
 		const htmlTable = generateHTMLPage(
-			file,
+			file,  // This will be 'light' or 'night'
 			allSimplifiedLists.flat(),
 			a,
 			b,
@@ -280,6 +309,10 @@ async function runAccessibilityChecksForURLs( project, query, mobile, source, li
 	console.log('Copy remaining files.');
 	fs.copyFileSync( 'scripts/collapsible.js', 'report/collapsible.js' );
 	fs.copyFileSync( 'scripts/summarizer.js', 'report/summarizer.js' );
+
+	// Output summaryData to console at the end of the run
+	console.log('Summary Data:');
+	console.log(JSON.stringify(summaryData, null, 2));
 }
 
 // Export the function
