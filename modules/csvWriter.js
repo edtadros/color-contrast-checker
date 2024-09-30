@@ -23,6 +23,21 @@ function writeSimplifiedListToCSV( simplifiedLists, file ) {
 	}
 }
 
+function writeSummaryToCSV(summaryData) {
+    const headers = summaryData.headers.join(',');
+    const rows = summaryData.data.map(item => 
+        `${item.id},${item.project},"${item.pageTitle}",${item.pageUrl},${item.light},${item.dark}`
+    ).join('\n');
+
+    const csvContent = `${headers}\n${rows}`;
+    const directoryPath = path.join(__dirname, '../report');
+    const filePath = path.join(directoryPath, 'summary.csv');
+
+    fs.writeFileSync(filePath, csvContent);
+    console.log(`Summary CSV file generated at ${filePath}`);
+}
+
 module.exports = {
-	writeSimplifiedListToCSV
+	writeSimplifiedListToCSV,
+	writeSummaryToCSV  // Add this line
 };

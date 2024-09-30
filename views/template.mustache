@@ -50,6 +50,23 @@
 		.table-summary {
 			display: block;
 		}
+
+		/* Add this new style for the summary table */
+		.summary-table {
+			display: table;
+			width: 100%;
+			margin-top: 20px;
+		}
+
+		/* Style for the link in the Page column */
+		.summary-table td:nth-child(3) a {
+			color: #0645ad;
+			text-decoration: none;
+		}
+
+		.summary-table td:nth-child(3) a:hover {
+			text-decoration: underline;
+		}
 	</style>
 </head>
 
@@ -60,9 +77,23 @@
 	<p>{{passingPages}} pages without color contrast violations.</p>
 	<p>{{failingPages}} pages with color contrast violations.</p>
 	<div id="summary"></div>
+	{{^hideExpandButton}}
 	<button id="expandAll">Expand all sections</button>
-	{{{tableSections}}} <!-- Use triple mustache for raw HTML content -->
- <script src="./collapsible.js"></script>
- <script src="./summarizer.js"></script>
+	{{/hideExpandButton}}
+	{{{tableSections}}}
+	{{#isSummary}}
+	<table class="summary-table">
+		<tr>
+			<th>Total Light Mode Violations</th>
+			<th>Total Dark Mode Violations</th>
+		</tr>
+		<tr>
+			<td>{{totalLight}}</td>
+			<td>{{totalDark}}</td>
+		</tr>
+	</table>
+	{{/isSummary}}
+	<script src="./collapsible.js"></script>
+	<script src="./summarizer.js"></script>
 </body>
 </html>

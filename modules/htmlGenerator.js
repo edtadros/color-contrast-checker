@@ -101,6 +101,74 @@ function generateHTMLPage( file, simplifiedLists, noColorContrastViolationCount,
 	}
 }
 
+function generateSummaryHTMLPage(summaryData, pagesScanned) {
+	const fs = require('fs');
+	const path = require('path');
+	const mustache = require('mustache');
+
+	// Read the template file
+	const template = fs.readFileSync(path.join(__dirname, '../views/template.mustache'), 'utf8');
+
+	// Generate table rows from summaryData
+	const tableRows = summaryData.data.map(item => `
+		<tr>
+			<td>${item.id}</td>
+			<td>${item.project}</td>
+			<td><a href="${item.pageUrl}">${item.pageTitle}</a></td>
+			<td>${item.light}</td>
+			<td>${item.dark}</td>
+		</tr>
+	`).join('');
+
+	// Create the table HTML
+	const tableHTML = `
+		<table class="summary-table">
+			<thead>
+				<tr>
+					${summaryData.headers.map(header => `<th>${header}</th>`).join('')}
+				</tr>
+			</thead>
+			<tbody>
+				${tableRows}
+			</tbody>
+		</table>
+	`;
+
+	// Calculate totals
+	const totalLight = summaryData.data.reduce((sum, item) => sum + item.light, 0);
+	const totalDark = summaryData.data.reduce((sum, item) => sum + item.dark, 0);
+
+	// Render the template with dynamic content
+	const htmlContent = mustache.render(template, {
+		pageTitle: 'Summary Report',
+		pagesScanned: pagesScanned,
+		totalItems: summaryData.data.length,
+		tableSections: tableHTML,
+		passingPages: summaryData.data.filter(item => item.light === 0 && item.dark === 0).length,
+		failingPages: summaryData.data.filter(item => item.light > 0 || item.dark > 0).length,
+		isSummary: true,
+		totalLight: totalLight,
+		totalDark: totalDark,
+		hideExpandButton: true 
+	});
+
+	// Determine the output directory
+	const outputDir = path.join(__dirname, '../report');
+
+	// Check if the directory exists, if not create it
+	if (!fs.existsSync(outputDir)) {
+		fs.mkdirSync(outputDir, { recursive: true });
+	}
+
+	// Write the generated HTML to the specified path
+	const outputPath = path.join(outputDir, 'summary.html');
+	fs.writeFileSync(outputPath, htmlContent);
+
+	console.log(`Summary HTML page generated successfully at ${outputPath}`);
+}
+
+// Don't forget to export the new function
 module.exports = {
-	generateHTMLPage
+	generateHTMLPage,
+	generateSummaryHTMLPage
 };

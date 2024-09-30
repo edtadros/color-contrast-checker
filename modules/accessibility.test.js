@@ -2,7 +2,7 @@
 const puppeteer = require( 'puppeteer' );
 const axeCore = require( 'axe-core' );
 const { createTestCases } = require( './topArticles' );
-const { writeSimplifiedListToCSV } = require( './csvWriter' );
+const { writeSimplifiedListToCSV, writeSummaryToCSV } = require( './csvWriter' );
 const { generateHTMLPage } = require( './htmlGenerator' );
 const fs = require( 'fs' );
 const path = require( 'path' );
@@ -187,7 +187,7 @@ function sleep( time ) {
 async function runAccessibilityChecksForURLs( project, query, mobile, source, limit, sleepDuration = 5000, addBetaClusterStyles = false, includeScreenshots = false ) {
 	// Initialize summaryData for summary report
 	let summaryData = {
-		headers: ["#", "URL", "Light", "Dark"],
+		headers: ["#", "Project", "Page", "Light", "Dark"],
 		data: []
 	};
 
@@ -214,7 +214,9 @@ async function runAccessibilityChecksForURLs( project, query, mobile, source, li
 			// Add a new entry to summaryData when starting to check a URL
 			summaryData.data.push({
 				id: i + 1,
-				url: new URL(testCase.url).hostname,
+				project: new URL(testCase.url).hostname,
+				pageTitle: testCase.title,
+				pageUrl: testCase.url,
 				light: 0,  // Initialize to 0 this will be overwritten by the actual count
 				dark: 0    // Initialize to 0 this will be overwritten by the actual count
 			});
@@ -262,7 +264,7 @@ async function runAccessibilityChecksForURLs( project, query, mobile, source, li
 				} );
 
 				// Update summaryData
-				const summaryIndex = summaryData.data.findIndex(item => item.url === project);
+				const summaryIndex = summaryData.data.findIndex(item => item.project === project);
 				if (summaryIndex !== -1) {
 					if (file === 'light') {
 						summaryData.data[summaryIndex].light = errorCount;
@@ -313,6 +315,14 @@ async function runAccessibilityChecksForURLs( project, query, mobile, source, li
 	// Output summaryData to console at the end of the run
 	console.log('Summary Data:');
 	console.log(JSON.stringify(summaryData, null, 2));
+
+	// After all checks are done and summaryData is populated
+	const htmlGenerator = require('./htmlGenerator');
+	htmlGenerator.generateSummaryHTMLPage(summaryData, pagesScanned);
+
+	// Write summary data to CSV
+	writeSummaryToCSV(summaryData);
+
 }
 
 // Export the function
