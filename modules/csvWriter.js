@@ -26,7 +26,7 @@ function writeSimplifiedListToCSV( simplifiedLists, file ) {
 function writeSummaryToCSV(summaryData) {
     const headers = summaryData.headers.join(',');
     const rows = summaryData.data.map(item => 
-        `${item.id},${item.project},"${item.pageTitle}",${item.pageUrl},${item.light},${item.dark}`
+        `${item.id},${item.project},"${item.pageUrl}",${item.light},${item.dark}`
     ).join('\n');
 
     const csvContent = `${headers}\n${rows}`;

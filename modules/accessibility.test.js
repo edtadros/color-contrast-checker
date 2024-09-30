@@ -7,7 +7,6 @@ const { generateHTMLPage } = require( './htmlGenerator' );
 const fs = require( 'fs' );
 const path = require( 'path' );
 const decorateSelector = require( './decorateSelector' );
-const { generateSummaryReport } = require('./summaryReport');
 
 // Counters and variables
 let noColorContrastViolationCount = 0;
